@@ -2,18 +2,19 @@
 // Li
 //Sept 20, 2022
 
+//grid
 function setup() {
   createCanvas(windowWidth, windowHeight);
 }
 
 function draw() {
-  background("white");
+  background("#FFE8D6");
   drawChessboard();
 }
 
 function drawChessboard() {
-  let cellWidth = width/8;
-  let cellHeight = height/8;
+  let cellWidth = width/18;
+  let cellHeight = height/18;
   if (cellWidth > cellHeight) {
     cellWidth = cellHeight;
   }
@@ -22,8 +23,9 @@ function drawChessboard() {
   }
 
   let isWhite = true;
-  for (let y = 0; y < 8; y++) {
-    for (let x = 0; x < 8; x++) {
+  for (let y = 0; y < 18; y++) {
+    for (let x = 0; x < 18; x++) {
+      stroke("gray");
       rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
     }
     isWhite = !isWhite; //flip boolean in between rows
@@ -33,3 +35,12 @@ function drawChessboard() {
 function windowResized() {
   setup();
 }
+
+//black controls
+
+
+//white controls
+
+
+//rules
+
