@@ -5,10 +5,12 @@
 //grid
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  windowHeight = 400;
+  windowHeight = 400;
 }
 
 function draw() {
-  background("#FFE8D6");
+  background(255, 232, 214);
   drawChessboard();
 }
 
@@ -22,13 +24,12 @@ function drawChessboard() {
     cellHeight = cellWidth;
   }
 
-  let isWhite = true;
   for (let y = 0; y < 18; y++) {
     for (let x = 0; x < 18; x++) {
       stroke("gray");
+      fill(255, 232, 214);
       rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
     }
-    isWhite = !isWhite; //flip boolean in between rows
   }
 }
 
