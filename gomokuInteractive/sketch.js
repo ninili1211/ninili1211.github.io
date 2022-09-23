@@ -2,11 +2,11 @@
 // Li
 //Sept 20, 2022
 
-//grid
+//background
+let x = 400;
+let y = 400;
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  windowHeight = 400;
-  windowHeight = 400;
 }
 
 function draw() {
@@ -23,7 +23,7 @@ function drawChessboard() {
   else {
     cellHeight = cellWidth;
   }
-
+  translate(width/4, height/1000);
   for (let y = 0; y < 18; y++) {
     for (let x = 0; x < 18; x++) {
       stroke("gray");
@@ -37,11 +37,7 @@ function windowResized() {
   setup();
 }
 
-//black controls
-
-
-//white controls
-
-
-//rules
-
+function blackDot() {
+  circle(x/18, y/18, 40);
+  drawChessboard();
+}

@@ -2,16 +2,17 @@
 // Li
 //Sept 19, 2022
 
+//setup
 function setup() {
   createCanvas(windowWidth, windowHeight);
 }
 
 function draw() {
   background("white");
-  drawChessboard();
+  drawBoard();
 }
 
-function drawChessboard() {
+function drawBoard() {
   let cellWidth = width/8;
   let cellHeight = height/8;
   if (cellWidth > cellHeight) {
