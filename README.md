@@ -1,2 +1,3 @@
 # ninili1211.github.io
 Making Gomoku...
+And struggling daily. 
