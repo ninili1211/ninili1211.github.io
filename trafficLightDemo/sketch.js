@@ -1,12 +1,12 @@
 // Traffic Light Starter Code
 // Nini
-// 09/28/2022
+// Sept 28, 2022
 
 // GOAL: make a 'traffic light' simulator. For now, just have the light
 // changing according to time. You may want to investigate the millis()
 // function at https://p5js.org/reference/#/p5/millis
 
-let lightColor = "red";
+let state = "green";
 let lastTimeSwitched = 0;
 let redLightDuration = 5000;
 let yellowLightDuration = 1000;
@@ -18,28 +18,42 @@ function setup() {
 
 function draw() {
   background(255);
+  drawOutlineOfLights();
   checkIfLightSwitched();
-  correctColor();
-  drawLights();
+  showCorrectLight();
 }
 
 function checkIfLightSwitched() {
-  if (lightColor === green && lastTimeSwitched + greenLightDuration) {
-    lightColor = "yellow";
-    lastTimeSwitched = millis;  
-  }
-  if (lightColor === green && lastTimeSwitched + greenLightDuration) {
-    lightColor = "green";
+  if (state === "green" && millis() > lastTimeSwitched + greenLightDuration) {
+    state = "yellow";
     lastTimeSwitched = millis();
-
-    if (lightColor === green && lastTimeSwitched + redLightDuration) {
-      lightColor = "red";
-      lastTimeSwitched = millis();
-    }
+  }
+  else if (state === "yellow" && millis() > lastTimeSwitched + yellowLightDuration) {
+    state = "red";
+    lastTimeSwitched = millis();
+  }
+  else if (state === "red" && millis() > lastTimeSwitched + redLightDuration) {
+    state = "green";
+    lastTimeSwitched = millis();
   }
 }
 
-function drawLights() {
+function showCorrectLight() {
+  if (state === "red") {
+    fill("red");
+    ellipse(width / 2, height / 2 - 65, 50, 50); //top
+  }
+  else if (state === "yellow") {
+    fill("yellow");
+    ellipse(width / 2, height / 2, 50, 50); //middle
+  }
+  else if (state === "green") {
+    fill("green");
+    ellipse(width / 2, height / 2 + 65, 50, 50); //bottom
+  }
+}
+
+function drawOutlineOfLights() {
   //box
   rectMode(CENTER);
   fill(0);
@@ -50,19 +64,4 @@ function drawLights() {
   ellipse(width / 2, height / 2 - 65, 50, 50); //top
   ellipse(width / 2, height / 2, 50, 50); //middle
   ellipse(width / 2, height / 2 + 65, 50, 50); //bottom
-}
-
-function correctColor() {
-  if (lightColor === "red") {
-    fill("red");
-    ellipse(width / 2, height / 2 - 65, 50, 50); //top
-  }
-  else if (lightColor === "green") {
-    fill("green");
-    ellipse(width / 2, height / 2 + 65, 50, 50); //bottom
-  }
-  else if (lightColor === "yellow"){
-    fill("yellow");
-    ellipse(width / 2, height / 2, 50, 50); //middle
-  }
 }
