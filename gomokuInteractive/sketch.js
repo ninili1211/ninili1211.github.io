@@ -38,6 +38,6 @@ function windowResized() {
 }
 
 function blackDot() {
-  circle(x/18, y/18, 40);
-  drawChessboard();
+  fill("black");
+  ellipse(56, 46, 55, 55);
 }
