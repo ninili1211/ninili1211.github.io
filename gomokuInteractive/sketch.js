@@ -2,7 +2,8 @@
 // Li
 //Sept 20, 2022
 
-//background
+//setup
+let state = "start";
 let x = 400;
 let y = 400;
 function setup() {
@@ -11,11 +12,46 @@ function setup() {
 
 function draw() {
   background(255, 232, 214);
-  drawChessboard();
+  if (state === "start") {
+    startScreen();
+  }
+  if (state === "main") {
+    drawChessboard();
+  }
 }
 
+function windowResized() {
+  setup();
+}
+
+//start screen
+function mousePressed() {
+  if (state === "start" && mouseInsideRect(400, 700, 400, 550)) {
+    state = "main";
+  } 
+}
+
+function startScreen() {
+  if (mouseInsideRect(400, 700, 400, 550)) {
+    fill("gray");
+  }
+  else {
+    fill("black");
+  }
+  rect(400, 400, 300, 150);
+  fill("white");
+  textSize(50);
+  text("Play Gomoku!", 480, 490);
+}
+
+function mouseInsideRect(left, right, top, bottom) {
+  return mouseX >= left && mouseX <= right &&
+         mouseY >= top && mouseY <= bottom;
+}
+
+//into the game
 function drawChessboard() {
-  let cellWidth = width/18;
+  let cellWidth = width*0.75/18;
   let cellHeight = height/18;
   if (cellWidth > cellHeight) {
     cellWidth = cellHeight;
@@ -31,10 +67,6 @@ function drawChessboard() {
       rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
     }
   }
-}
-
-function windowResized() {
-  setup();
 }
 
 function blackDot() {
