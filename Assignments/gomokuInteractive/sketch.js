@@ -1,13 +1,16 @@
 //Interactive Assignment - Gomoku 
 // Li
 //Sept 20, 2022
-//Extra For Experts - Sound Effects? Centered Circle that's not an image?
+//Extra For Experts - Centered Circle that's not an image. coded algorithm
 
-//setup
+//global variables
 let state = "start";
+let colourstate = "black";
 let x = 400;
 let y = 400;
 let cellWidth, cellHeight, circleX, circleY;
+
+//setup + draw
 function setup() {
   createCanvas(windowWidth, windowHeight);
 }
@@ -19,6 +22,7 @@ function draw() {
   }
   if (state === "main") {
     drawChessboard();
+    drawCoordinates();
   }
 }
 
@@ -51,7 +55,7 @@ function mouseInsideRect(left, right, top, bottom) {
          mouseY >= top && mouseY <= bottom;
 }
 
-//beginning of game
+//chessboard
 function drawChessboard() {
   cellWidth = width*0.75/18;
   cellHeight = height/18;
@@ -69,7 +73,29 @@ function drawChessboard() {
       rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
     }
   }
-  blackDot();
+  if (colourstate === "black") {
+    blackDot();
+  }
+}
+
+//coordinates
+function drawCoordinates() {
+  cellWidth = width*0.75/18;
+  cellHeight = height/18;
+  if (cellWidth > cellHeight) {
+    cellWidth = cellHeight;
+  }
+  else {
+    cellHeight = cellWidth;
+  }
+  translate(width/4, height/1000);
+  for (let y = 0; y < 18; y++) {
+    for (let x = 0; x < 18; x++) {
+      stroke("gray");
+      fill(255, 232, 214);
+      ellipse(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+    }
+  }
 }
 
 //the pieces
