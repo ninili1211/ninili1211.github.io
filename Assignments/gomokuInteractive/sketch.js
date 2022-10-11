@@ -20,7 +20,7 @@ function draw() {
   if (state === "start") {
     startScreen();
   }
-  if (state === "main") {
+  if (state === "game") {
     drawChessboard();
     drawCoordinates();
   }
@@ -33,7 +33,7 @@ function windowResized() {
 //start screen
 function mousePressed() {
   if (state === "start" && mouseInsideRect(400, 700, 400, 550)) {
-    state = "main";
+    state = "game";
   } 
 }
 
@@ -65,7 +65,8 @@ function drawChessboard() {
   else {
     cellHeight = cellWidth;
   }
-  translate(width/4, height/1000+10);
+  push();
+  translate(width/4, height/1000);
   for (let y = 0; y < 18; y++) {
     for (let x = 0; x < 18; x++) {
       stroke("gray");
@@ -73,6 +74,7 @@ function drawChessboard() {
       rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
     }
   }
+  pop();
   if (colourstate === "black") {
     blackDot();
   }
@@ -103,3 +105,5 @@ function whiteDot() {
   fill("white");
   ellipse(mouseX, mouseY, circleX, circleY);
 }
+
+function 
