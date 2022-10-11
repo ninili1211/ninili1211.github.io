@@ -74,6 +74,7 @@ function drawChessboard() {
       rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
     }
   }
+  drawCoordinates();
   pop();
   if (colourstate === "black") {
     blackDot();
@@ -85,8 +86,7 @@ function drawCoordinates() {
   for (let y = 0; y < 18; y++) {
     for (let x = 0; x < 18; x++) {
       stroke("gray");
-      fill(255, 232, 214);
-      ellipse(0, 0, 10, 10);
+      ellipse(x, y, 10, 10);
     }
   }
 }
@@ -105,5 +105,3 @@ function whiteDot() {
   fill("white");
   ellipse(mouseX, mouseY, circleX, circleY);
 }
-
-function 
