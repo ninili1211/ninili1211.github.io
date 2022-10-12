@@ -9,14 +9,22 @@ let colourstate = "black";
 let x = 400;
 let y = 400;
 let cellWidth, cellHeight, circleX, circleY;
+let woodImage;
+let scalar = 7;
 
 //setup + draw
+function preload() {
+  woodImage = loadImage("wood.jpg");
+}
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  imageMode(CENTER);
 }
 
 function draw() {
   background(255, 232, 214);
+  image(woodImage, 0, 0, woodImage.width*scalar, woodImage.height*scalar);
   if (state === "start") {
     startScreen();
   }
@@ -83,11 +91,8 @@ function drawChessboard() {
 
 //coordinates
 function drawCoordinates() {
-  for (let y = 0; y < 18; y++) {
-    for (let x = 0; x < 18; x++) {
-      stroke("gray");
-      ellipse(x, y, 10, 10);
-    }
+  for (let x = 0; x < width; x += cellWidth){
+    ellipse(x, 0, 2);
   }
 }
 
