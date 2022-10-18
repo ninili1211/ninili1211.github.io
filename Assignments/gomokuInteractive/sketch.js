@@ -8,7 +8,7 @@ let state = "start";
 let colourstate = "black";
 let x = 400;
 let y = 400;
-let cellWidth, cellHeight, circleX, circleY;
+let cellWidth, cellHeight, circleX, circleY, coordinateX, coordinateY;
 let woodImage;
 let scalar = 7;
 
@@ -30,7 +30,6 @@ function draw() {
   }
   if (state === "game") {
     drawChessboard();
-    drawCoordinates();
   }
 }
 
@@ -74,7 +73,8 @@ function drawChessboard() {
     cellHeight = cellWidth;
   }
   push();
-  translate(width/4, height/1000);
+  translate(width/4, cellHeight);
+  drawCoordinates();
   for (let y = 0; y < 18; y++) {
     for (let x = 0; x < 18; x++) {
       stroke("gray");
@@ -82,7 +82,6 @@ function drawChessboard() {
       rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
     }
   }
-  drawCoordinates();
   pop();
   if (colourstate === "black") {
     blackDot();
@@ -91,8 +90,22 @@ function drawChessboard() {
 
 //coordinates
 function drawCoordinates() {
-  for (let x = 0; x < width; x += cellWidth){
-    ellipse(x, 0, 2);
+  cellWidth = width*0.75/18;
+  cellHeight = height/19;
+  coordinateX = 0;
+  coordinateY = 0;
+  if (cellWidth > cellHeight) {
+    cellWidth = cellHeight;
+  }
+  else {
+    cellHeight = cellWidth;
+  }
+  for (let i = 0; i < 18; i += cellWidth) {
+    for (let j = 0; j < 18; j += cellHeight) {
+      ellipse(i*cellWidth, j*cellHeight, 10, 10);
+      console.log(i*cellWidth);
+      console.log(j*cellHeight);
+    }
   }
 }
 
