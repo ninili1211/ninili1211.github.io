@@ -1,10 +1,3 @@
-// Project Title
-// Your Name
-// Date
-//
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
-
 let theCircles = [];
 
 function setup() {
@@ -12,17 +5,28 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  background(0);
+  displayCircles();
 }
 
-mousePressed() {
+function mousePressed() {
   spawnCircle();
 }
+
+function displayCircles() {
+  for (let i = 0; i < theCircles.length; i++) {
+    noStroke();
+    fill(theCircles[i].theColor);
+    circle(theCircles[i].x, theCircles[i].y, theCircles[i].radius*2);
+  }
+}
+
 function spawnCircle() {
   let thisCircle = {
     x: mouseX,
     y: mouseY,
-    radius: 50, 
+    radius: random(25, 75),
+    theColor: color(random(255), random(255), random(255), random(255)),
   };
   theCircles.push(thisCircle);
 }
