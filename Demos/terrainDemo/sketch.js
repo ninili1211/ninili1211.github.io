@@ -11,10 +11,12 @@ function setup() {
 function draw() {
   background(220);
   for (let i = startingLocation; i < startingLocation + width; i++) {
-    displayRectangle(i - startingLocation, theHeights[i], 1);
+    displayRectangle(i-startingLocation, theHeights[i], 1);
   }
-  if (keyIsPressed()) {
-    startingLocation++;
+
+  //move when key is pressed
+  if (keyIsPressed) {
+    startingLocation += 5;
   }
 }
 
@@ -28,7 +30,7 @@ function generateHeights(howMany) {
   let time = random(10000);
   for (let i = 0; i < howMany; i++) {
     tempArray.push(noise(time) * height);
-    time += 0.005;
+    time += 0.001;
   }
   return tempArray;
 }
