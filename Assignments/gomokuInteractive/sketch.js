@@ -4,7 +4,6 @@
 //Extra For Experts - Centered Circle that's not an image. coded algorithm
 
 //global variables
-let state = "start";
 let colourstate = "black";
 let x = 400;
 let y = 400;
@@ -25,41 +24,12 @@ function setup() {
 function draw() {
   background(255, 232, 214);
   image(woodImage, 0, 0, woodImage.width*scalar, woodImage.height*scalar);
-  if (state === "start") {
-    startScreen();
-  }
-  if (state === "game") {
-    drawChessboard();
-  }
+  drawChessboard();
+  drawCoordinates();
 }
 
 function windowResized() {
   setup();
-}
-
-//start screen
-function mousePressed() {
-  if (state === "start" && mouseInsideRect(400, 700, 400, 550)) {
-    state = "game";
-  } 
-}
-
-function startScreen() {
-  if (mouseInsideRect(400, 700, 400, 550)) {
-    fill("gray");
-  }
-  else {
-    fill("black");
-  }
-  rect(400, 400, 300, 150);
-  fill("white");
-  textSize(50);
-  text("Play Gomoku!", 480, 490);
-}
-
-function mouseInsideRect(left, right, top, bottom) {
-  return mouseX >= left && mouseX <= right &&
-         mouseY >= top && mouseY <= bottom;
 }
 
 //chessboard
@@ -74,12 +44,11 @@ function drawChessboard() {
   }
   push();
   translate(width/4, cellHeight);
-  drawCoordinates();
   for (let y = 0; y < 18; y++) {
     for (let x = 0; x < 18; x++) {
       stroke("gray");
       fill(255, 232, 214);
-      rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      rect(x*cellWidth-25, y*cellHeight-25, cellWidth, cellHeight);
     }
   }
   pop();
@@ -102,7 +71,7 @@ function drawCoordinates() {
   }
   for (let i = 0; i < 18; i += cellWidth) {
     for (let j = 0; j < 18; j += cellHeight) {
-      ellipse(i*cellWidth, j*cellHeight, 10, 10);
+      ellipse(i*cellWidth-25, j*cellHeight-25, 10, 10);
       console.log(i*cellWidth);
       console.log(j*cellHeight);
     }
