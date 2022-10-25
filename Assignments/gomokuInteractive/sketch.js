@@ -5,15 +5,15 @@
 
 //global variables
 let colourstate = "black";
-let x = 400;
-let y = 400;
-let cellWidth, cellHeight, circleX, circleY, coordinateX, coordinateY;
+let x, y, cellWidth, cellHeight, circleX, circleY;
 let woodImage;
-let scalar = 7;
+let boardImage;
+let scalar = 1;
 
 //setup + draw
 function preload() {
   woodImage = loadImage("wood.jpg");
+  boardImage = loadImage("gomoku.jpg");
 }
 
 function setup() {
@@ -23,72 +23,59 @@ function setup() {
 
 function draw() {
   background(255, 232, 214);
-  image(woodImage, 0, 0, woodImage.width*scalar, woodImage.height*scalar);
-  drawChessboard();
+  image(woodImage, windowWidth/2, windowHeight/2, woodImage.width, woodImage.height);
+  image(boardImage, windowWidth/2, windowHeight/2, boardImage.width, boardImage.height);
   drawCoordinates();
+  if (colourstate === "black") {
+    blackDot();
+  }
 }
 
 function windowResized() {
   setup();
 }
 
-//chessboard
-function drawChessboard() {
-  cellWidth = width*0.75/18;
-  cellHeight = height/18;
-  if (cellWidth > cellHeight) {
-    cellWidth = cellHeight;
-  }
-  else {
-    cellHeight = cellWidth;
-  }
-  push();
-  translate(width/4, cellHeight);
-  for (let y = 0; y < 18; y++) {
-    for (let x = 0; x < 18; x++) {
-      stroke("gray");
-      fill(255, 232, 214);
-      rect(x*cellWidth-25, y*cellHeight-25, cellWidth, cellHeight);
-    }
-  }
-  pop();
-  if (colourstate === "black") {
-    blackDot();
-  }
-}
-
 //coordinates
 function drawCoordinates() {
-  cellWidth = width*0.75/18;
-  cellHeight = height/19;
-  coordinateX = 0;
-  coordinateY = 0;
+  let cellWidth = boardImage.width/14;
+  let cellHeight = boardImage.height/14;
+  x = windowWidth/2 - boardImage.width/2 + cellWidth/2;
+  y = windowHeight/2 - boardImage.width/2 + cellHeight/2;
   if (cellWidth > cellHeight) {
     cellWidth = cellHeight;
   }
   else {
     cellHeight = cellWidth;
   }
-  for (let i = 0; i < 18; i += cellWidth) {
-    for (let j = 0; j < 18; j += cellHeight) {
-      ellipse(i*cellWidth-25, j*cellHeight-25, 10, 10);
-      console.log(i*cellWidth);
-      console.log(j*cellHeight);
-    }
+
+  for (let i = 0; i < 8; i++) {
+    for (let j = 0; j < 8; j++) {
+      ellipse(x, y, 5, 5);
   }
 }
+}
+
+  
+  for (let i = 0; i < 14; i++) {
+    for(let j = 0; j < 14; j++) {
+    ellipse(x, y, 5, 5);
+    x += cellWidth;
+    y += cellHeight;
+    }
+  }
+
 
 //the pieces
 function blackDot() {
-  circleX = cellWidth;
-  circleY = cellHeight;
+  let cellWidth = boardImage.width/14;
+  let cellHeight = boardImage.height/14;
   fill("black");
-  ellipse(mouseX, mouseY, circleX, circleY);
+  ellipse(mouseX, mouseY, cellWidth, cellHeight);
 }
 
 function whiteDot() {
-  circleX = cellWidth;
-  circleY = cellHeight;
-  fill("white");
-  ellipse(mouseX, mouseY, circleX, circleY);
+  let cellWidth = boardImage.width/14;
+  let cellHeight = boardImage.height/14;
+  fill("black");
+  ellipse(mouseX, mouseY, cellWidth, cellHeight);
 }
