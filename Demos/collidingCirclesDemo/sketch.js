@@ -1,9 +1,4 @@
-// Colliding Circles
-// Nini Li
-// Oct 24, 2022
-
 let theCircles = [];
-let hit = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -17,6 +12,21 @@ function draw() {
   for (let i=0; i<theCircles.length; i++) {
     theCircles[i].x += theCircles[i].dx;
     theCircles[i].y += theCircles[i].dy;
+
+    //collision check
+    for (let j=0; j<theCircles.length; j++) {
+      if (i !== j) { //don't check if hitting self
+        if (isColliding(theCircles[i], theCircles[j])) {
+          //swap the speeds
+          let tempDx = theCircles[i].dx;
+          let tempDy = theCircles[i].dy;
+          theCircles[i].dx = theCircles[j].dx;
+          theCircles[i].dy = theCircles[j].dy;
+          theCircles[j].dx = tempDx;
+          theCircles[j].dy = tempDy;
+        }
+      }
+    }
 
     //left-right edges
     if (theCircles[i].x + theCircles[i].radius > width ||
@@ -39,6 +49,17 @@ function draw() {
   }
 }
 
+function isColliding(ball1, ball2) {
+  let distanceBetween = dist(ball1.x, ball1.y, ball2.x, ball2.y);
+  let radiiSum = ball1.radius + ball2.radius;
+  if (distanceBetween > radiiSum) {
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
 function mousePressed() {
   theCircles.push(spawnBall(mouseX, mouseY));
 }
@@ -53,30 +74,4 @@ function spawnBall(tempX, tempY) {
     theColor: color(random(255), random(255), random(255), random(255))
   };
   return newBall;
-}
-
-
-
-
-let theColor;
-
-function setup(){ 
-  createCanvas(windowWidth, windowHeight);
-}
-
-function draw() {
-  background(255);
-  rect(200, 200, 100, 150);
-  rect(mouseX, mouseY, 50, 75);
-
-  hit = collideRectRect(200, 200, 100, 150, mouseX, mouseY, 50, 75);
-
-  if (hit) {
-    theColor = "red";
-  }
-  else {
-    theColor = "black";
-  }
-  stroke(theColor);
-  print("colliding?", hit);
 }
