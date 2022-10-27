@@ -20,6 +20,12 @@ function draw() {
   displayGrid(grid);
 }
 
+function keyPressed() {
+  if (key === "e") {
+    grid = create2dArray(COLS, ROWS);
+  }
+}
+
 function mousePressed() {
   let xPos = Math.floor(mouseX/cellWidth);
   let yPos = Math.floor(mouseY/cellHeight);
