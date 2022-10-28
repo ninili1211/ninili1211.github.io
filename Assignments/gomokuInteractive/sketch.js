@@ -51,18 +51,18 @@ function drawCoordinates() {
   for (let i = 0; i < 8; i++) {
     for (let j = 0; j < 8; j++) {
       ellipse(x, y, 5, 5);
+    }
   }
-}
 }
 
   
-  for (let i = 0; i < 14; i++) {
-    for(let j = 0; j < 14; j++) {
+for (let i = 0; i < 14; i++) {
+  for(let j = 0; j < 14; j++) {
     ellipse(x, y, 5, 5);
     x += cellWidth;
     y += cellHeight;
-    }
   }
+}
 
 
 //the pieces
