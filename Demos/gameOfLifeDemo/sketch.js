@@ -81,7 +81,7 @@ function takeTurn(grid) {
         else {
           nextTurn[y][x] = 0;
         }
-      }
+      } 
     }
   }
 
