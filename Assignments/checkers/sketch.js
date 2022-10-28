@@ -5,16 +5,16 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-const ROWS = 40;
-const COLS = 40;
+const ROWS = 8;
+const COLS = 8;
 let grid;
 let cellWidth;
 let cellHeight;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  cellWidth = width/COLS;
-  cellHeight = height/ROWS;
+  cellWidth = windowHeight/COLS;
+  cellHeight = windowHeight/ROWS;
   grid = create2dArray(COLS, ROWS);
 }
 
