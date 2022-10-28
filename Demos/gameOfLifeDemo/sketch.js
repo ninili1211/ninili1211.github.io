@@ -8,6 +8,11 @@ let grid;
 let cellWidth;
 let cellHeight;
 let autoPlay = false;
+let gosperGun;
+
+function preload() {
+  gosperGun = loadJSON("gosper.json");
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -33,6 +38,9 @@ function keyPressed() {
   }
   if (key === "a") {
     autoPlay = !autoPlay;
+  }
+  if (key === "g") {
+    grid = gosperGun;
   }
 }
 
