@@ -5,8 +5,8 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-const ROWS = 8;
-const COLS = 8;
+const ROWS = 9;
+const COLS = 9;
 let grid;
 let cellWidth;
 let cellHeight;
@@ -19,7 +19,7 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  background("#a2d2ff");
   displayGrid(grid);
 }
 
@@ -38,7 +38,8 @@ function mousePressed() {
 function displayGrid(grid) {
   for (let y=0; y<ROWS; y++) {
     for (let x=0; x<COLS; x++) {
-      rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      fill("#d8f3dc");
+      rect(x*cellWidth + width / 4, y*cellHeight, cellWidth, cellHeight);
     }
   }
 }

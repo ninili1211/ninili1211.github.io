@@ -22,7 +22,7 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  background("220");
   if (autoPlay && frameCount % 3 === 0) {
     grid = takeTurn(grid);
   }
