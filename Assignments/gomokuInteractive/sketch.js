@@ -11,21 +11,16 @@ let boardImage;
 let scalar = 1;
 
 //setup + draw
-function preload() {
-  woodImage = loadImage("wood.jpg");
-  boardImage = loadImage("gomoku.jpg");
-}
-
 function setup() {
+  let windowHeight = windowWidth;
   createCanvas(windowWidth, windowHeight);
   imageMode(CENTER);
 }
 
 function draw() {
   background(255, 232, 214);
-  image(woodImage, windowWidth/2, windowHeight/2, woodImage.width, woodImage.height);
-  image(boardImage, windowWidth/2, windowHeight/2, boardImage.width, boardImage.height);
-  drawDotGrid();
+  translate (windowWidth / 4);
+  drawGrid();
   if (colourstate === "black") {
     blackDot();
   }
@@ -36,30 +31,38 @@ function windowResized() {
 }
 
 //DotGrid
-function drawDotGrid() {
-  let dotCellWidth = windowWidth/2 - boardImage.width/2 + cellWidth/2;
-  cellHeight = height/18;
-  if (dotCellWidth > cellHeight) {
-    dotCellWidth = cellHeight;
-  }
-  else {
-    cellHeight = dotCellWidth;
-  }
+// function drawDotGrid() {
+//   let dotCellWidth = windowWidth/2 - boardImage.width/2 + cellWidth/2;
+//   cellHeight = height/18;
+//   if (dotCellWidth > cellHeight) {
+//     dotCellWidth = cellHeight;
+//   }
+//   else {
+//     cellHeight = dotCellWidth;
+//   }
   
-  for (let y = 0; y < 8; y++) {
-    for (let x = 0; x < 8; x++) {
-      ellipse(x*dotCellWidth, y*cellHeight, 2, 2);
+//   for (let y = 0; y < 8; y++) {
+//     for (let x = 0; x < 8; x++) {
+//       ellipse(x*dotCellWidth, y*cellHeight, 2, 2);
+//     }
+//   }
+// }
+function drawGrid() {
+  translate (200, 25, 0)
+    let cellWidth = width/18;
+    let cellHeight = height/18;
+    if (cellWidth > cellHeight) {
+      cellWidth = cellHeight;
+    }
+    else {
+      cellHeight = cellWidth;
+    }
+    for (let y = 0; y < 14; y++) {
+      for (let x = 0; x < 14; x++) {
+        rect(x*cellWidth - 25, y*cellHeight - 25, cellWidth, cellHeight);
+      }
     }
   }
-}
-  
-for (let i = 0; i < 14; i++) {
-  for(let j = 0; j < 14; j++) {
-    ellipse(x, y, 5, 5);
-    x += cellWidth;
-    y += cellHeight;
-  }
-}
 
 //the pieces
 function blackDot() {
