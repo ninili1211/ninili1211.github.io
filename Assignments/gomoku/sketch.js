@@ -55,6 +55,9 @@ function drawChessboard() {
   if (colourstate === "black") {
     blackDot();
   }
+  if (colourstate === "white") {
+    whiteDot();
+  }
 }
 
 //coordinates
@@ -71,7 +74,7 @@ function drawCoordinates() {
   }
   for (let i = 0; i < 18; i += cellWidth) {
     for (let j = 0; j < 18; j += cellHeight) {
-      ellipse(i*cellWidth-25, j*cellHeight-25, 10, 10);
+      ellipse(coordinateX, coordinateY, 10, 10);
       console.log(i*cellWidth);
       console.log(j*cellHeight);
     }
