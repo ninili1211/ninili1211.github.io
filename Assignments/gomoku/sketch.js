@@ -55,6 +55,9 @@ function drawChessboard() {
   if (colourstate === "black") {
     blackDot();
   }
+  if (colourstate === "white") {
+    whiteDot();
+  }
 }
 
 //coordinates
