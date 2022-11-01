@@ -25,7 +25,7 @@ function draw() {
   background(255, 232, 214);
   image(woodImage, windowWidth/2, windowHeight/2, woodImage.width, woodImage.height);
   image(boardImage, windowWidth/2, windowHeight/2, boardImage.width, boardImage.height);
-  drawCoordinates();
+  drawDotGrid();
   if (colourstate === "black") {
     blackDot();
   }
@@ -35,26 +35,23 @@ function windowResized() {
   setup();
 }
 
-//coordinates
-function drawCoordinates() {
-  let cellWidth = boardImage.width/14;
-  let cellHeight = boardImage.height/14;
-  x = windowWidth/2 - boardImage.width/2 + cellWidth/2;
-  y = windowHeight/2 - boardImage.width/2 + cellHeight/2;
-  if (cellWidth > cellHeight) {
-    cellWidth = cellHeight;
+//DotGrid
+function drawDotGrid() {
+  let dotCellWidth = windowWidth/2 - boardImage.width/2 + cellWidth/2;
+  cellHeight = height/18;
+  if (dotCellWidth > cellHeight) {
+    dotCellWidth = cellHeight;
   }
   else {
-    cellHeight = cellWidth;
+    cellHeight = dotCellWidth;
   }
-
-  for (let i = 0; i < 8; i++) {
-    for (let j = 0; j < 8; j++) {
-      ellipse(x, y, 5, 5);
+  
+  for (let y = 0; y < 8; y++) {
+    for (let x = 0; x < 8; x++) {
+      ellipse(x*dotCellWidth, y*cellHeight, 2, 2);
     }
   }
 }
-
   
 for (let i = 0; i < 14; i++) {
   for(let j = 0; j < 14; j++) {
@@ -63,7 +60,6 @@ for (let i = 0; i < 14; i++) {
     y += cellHeight;
   }
 }
-
 
 //the pieces
 function blackDot() {
