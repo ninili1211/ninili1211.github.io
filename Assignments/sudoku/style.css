@@ -6,3 +6,10 @@ html, body {
 canvas {
   display: block;
 }
+
+.container{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

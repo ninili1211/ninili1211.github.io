@@ -39,7 +39,7 @@ function displayGrid(grid) {
   for (let y=0; y<ROWS; y++) {
     for (let x=0; x<COLS; x++) {
       fill("#d8f3dc");
-      rect(x*cellWidth + width / 4, y*cellHeight, cellWidth, cellHeight);
+      rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
     }
   }
 }
@@ -53,4 +53,8 @@ function create2dArray(COLS, ROWS) {
     }
   }
   return emptyArray;
+}
+
+for (let i = 0; i < grid.length; i++) {
+  
 }
