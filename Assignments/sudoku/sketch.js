@@ -19,7 +19,7 @@ function setup() {
 }
 
 function draw() {
-  background("#a2d2ff");
+  background("white");
   displayGrid(grid);
 }
 
@@ -36,10 +36,17 @@ function mousePressed() {
 }
 
 function displayGrid(grid) {
+  let isGreen = true;
   for (let y=0; y<ROWS; y++) {
     for (let x=0; x<COLS; x++) {
-      fill("#d8f3dc");
+      if (isGreen === true) {
+        fill("#d8f3dc");
+      }
+      else {
+        fill("#a2d2ff");
+      }
       rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      isGreen = !isGreen;
     }
   }
 }
