@@ -53,7 +53,9 @@ function drawGrid() {
   }
 
 function mousePressed() {
-  if (state === "wait" && mouseIn)
+  if (state === "wait" && mouseIn) {
+    
+  }
 }
 
 //the pieces
