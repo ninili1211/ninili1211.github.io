@@ -54,7 +54,3 @@ function create2dArray(COLS, ROWS) {
   }
   return emptyArray;
 }
-
-for (let i = 0; i < grid.length; i++) {
-  
-}
