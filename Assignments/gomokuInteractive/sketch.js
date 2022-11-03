@@ -13,21 +13,28 @@ let scalar = 1;
 function setup() {
   let windowHeight = windowWidth;
   createCanvas(windowWidth, windowHeight);
+  windowResized;
   imageMode(CENTER);
 }
 
 function draw() {
   background(255, 232, 214);
   translate (windowWidth / 4);
+  drawGrid();
   if (colourState === "black") {
     blackDot();
   }
   if (colourState === "white") {
     whiteDot();
   }
-  drawGrid();
+}
+
+function mousePressed() {
   if (colourState === "black") {
-    blackDot();
+    colourState = "white";
+  }
+  if (colourState === "white") {
+    colourState = "black";
   }
 }
 
@@ -45,35 +52,24 @@ function drawGrid() {
     else {
       cellHeight = cellWidth;
     }
-    for (let y = 0; y < 14; y++) {
-      for (let x = 0; x < 14; x++) {
-        rect(x*cellWidth - 25, y*cellHeight - 25, cellWidth, cellHeight);
+    for (let y = 0; y < 10; y++) {
+      for (let x = 0; x < 10; x++) {
+        rect(x*cellWidth - 25, y*cellHeight - 25, cellWidth - 25, cellHeight - 25);
       }
     }
   }
 
-function mousePressed() {
-  if (state === "wait" && mouseIn) {
-    
-  }
-}
-
 //the pieces
 function blackDot() {
-  let cellWidth = boardImage.width/14;
-  let cellHeight = boardImage.height/14;
+  let cellWidth = width/18;
+  let cellHeight = height/18;
   fill("black");
   ellipse(mouseX, mouseY, cellWidth, cellHeight);
 }
 
 function whiteDot() {
-  let cellWidth = boardImage.width/14;
-  let cellHeight = boardImage.height/14;
+  let cellWidth = width/18;
+  let cellHeight = height/18;
   fill("black");
   ellipse(mouseX, mouseY, cellWidth, cellHeight);
-}
-
-function mouseInsideRect(left, right, top, bottom) {
-  return mouseX >= left && mouseX <= right &&
-         mouseY >= top && mouseY <= bottom;
 }
