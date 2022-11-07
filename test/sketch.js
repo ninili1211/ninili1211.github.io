@@ -1,16 +1,10 @@
-function draw() {
-  cellWidth = width/18;
-  cellHeight = height/18;
-  if (cellWidth > cellHeight) {
-    cellWidth = cellHeight;
-  }
-  else {
-    cellHeight = cellWidth;
-  }
+function setup() {
+  createCanvas(420, 420);
+}
 
-  for (let y = 0; y < 8; y++) {
-    for (let x = 0; x < 8; x++) {
-      ellipse(x*cellWidth, y*cellHeight, 2, 2);
-    }
-  }
+function draw() {
+  background("white");
+  rect(155, 65, 10, 290, 20);
+  rect(255, 65, 10, 290, 20);
+  rect(65, 155, 290, 10, 20);
 }
