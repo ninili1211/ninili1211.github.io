@@ -8,6 +8,7 @@
 //  Used "translate" to center text on tiles
 //  "change" is called when an element of a function changes
 //  *Exclude 2D Arrays since we learnt it in class already*
+// Apologies for turning this in so late...
 
 //global variables
 let tileSize = 133; 
