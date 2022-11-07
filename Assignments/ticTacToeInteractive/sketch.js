@@ -30,6 +30,16 @@ function setupTiles() {
   }
 }
 
+//reset
+function keyPressed() {
+  resetGame();
+}
+
+function resetGame() {
+  createCanvas(400, 400);
+  setupTiles();
+}
+
 //draw
 function draw() {
   background(255, 232, 214);
