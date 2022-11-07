@@ -1,6 +1,7 @@
 //Interactive Assignment - Tic Tac Toe (had some problems pop up with Gomoku that I simply could not fix) 
 //Nini Li
 //Sept 20, 2022
+//Tic Tac Toe! No win checker, but hit any button on the keyboard and the game resets!
 //Extra For Experts - 
 //  Studied how to create objects by using the "class" function
 //    -"class" creates objects of which can be called using "this"
