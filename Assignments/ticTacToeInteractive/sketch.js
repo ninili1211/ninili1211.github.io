@@ -23,9 +23,9 @@ function setup() {
 }
 
 function setupTiles() {
-  for (row = 0; row < 3; row++) {
+  for (let row = 0; row < 3; row++) {
     tileRows[row] = [];
-    for (col = 0; col < 3; col++) {
+    for (let col = 0; col < 3; col++) {
       tileRows[row][col] = new Tile(col, row);
     }
   }
@@ -53,18 +53,18 @@ function draw() {
 function drawGrid() {
   noFill();
   stroke(0);
-  for (row = 0; row < 3; row++) {
+  for (let row = 0; row < 3; row++) {
     line(0, row * tileSize, tileSize * 3, row * tileSize);
   }
-  for (col = 0; col < 3; col++) {
+  for (let col = 0; col < 3; col++) {
     line(col * tileSize, 0, col * tileSize, tileSize * 3);
   }
 
 }
 function drawTiles() { 
   //tiles
-  for (row = 0; row < 3; row++) {
-    for (col = 0; col < 3; col++) {
+  for (let row = 0; row < 3; row++) {
+    for (let col = 0; col < 3; col++) {
       tileRows[row][col].show();
     }
   }
@@ -79,17 +79,18 @@ function showTurn(){
 
 function switchPlayer() { 
   //change turns
-  if (currentPlayer == "X") {
+  if (currentPlayer === "X") {
     currentPlayer = "O";
-  } else {
+  } 
+  else {
     currentPlayer = "X";
   }
 }
 
 //when mouse is clicked
 function mouseClicked() {
-  for (row = 0; row < 3; row++) {
-    for (col = 0; col < 3; col++) {
+  for (let row = 0; row < 3; row++) {
+    for (let col = 0; col < 3; col++) {
       ifEmpty(tileRows[row][col]);
     }
   }
@@ -98,7 +99,7 @@ function mouseClicked() {
 function ifEmpty(currentTile) { 
   //check if tile empty
   if (currentTile.isMouseInBounds() && currentTile.isEmpty()) {
-    currentTile.change(currentPlayer)
+    currentTile.change(currentPlayer);
     switchPlayer();
   }
 }
@@ -113,18 +114,20 @@ class Tile {
 
   change(theTurn) {
     //ensures that the letter on the tile is correct
-    if (theTurn == "X") {
+    if (theTurn === "X") {
       this.theTurn = "X";
-    } else if (theTurn == "O") {
+    } 
+    else if (theTurn === "O") {
       this.theTurn = "O";
     }
   }
 
   isEmpty() {
-    if (this.theTurn == " ") {
+    if (this.theTurn === " ") {
       //if empty
       return true;
-    } else {
+    } 
+    else {
       //if not then error
       alert("Must place on empty tile");//found alert outside of p5js references
       //thankful that the pop up actually works
