@@ -1,198 +1,152 @@
+//Interactive Assignment - Tic Tac Toe (had some problems pop up with Gomoku that I simply could not fix) 
+//Nini Li
+//Sept 20, 2022
+//Extra For Experts - 
+//  Studied how to create objects by using the "class" function
+//    -"class" creates objects of which can be called using "this"
+//  Learnt about pop ups using "alert"
+//  Used "translate" to center text on tiles
+//  "change" is called when an element of a function changes
+//  *Exclude 2D Arrays since we learnt it in class already*
+
+//global variables
+let tileSize = 133; 
+let tileRows = []; 
+let currentPlayer = "X"; 
+
+//setup
 function setup() {
-  createCanvas(420, 420);
+  createCanvas(400, 400);
+  setupTiles();
 }
 
+function setupTiles() {
+  for (row = 0; row < 3; row++) {
+    tileRows[row] = [];
+    for (col = 0; col < 3; col++) {
+      tileRows[row][col] = new Tile(col, row);
+    }
+  }
+}
+
+//draw
 function draw() {
-  background("white");
-  noStroke();
-  fill("black");
-  rect(155, 65, 10, 290, 20);
-  rect(255, 65, 10, 290, 20);
-  rect(65, 155, 290, 10, 20);
-  rect(65, 255, 290, 10, 20);
+  background(255, 232, 214);
+  drawGrid();
+  drawTiles();
+  showTurn();
 }
 
+//game board
+function drawGrid() {
+  noFill();
+  stroke(0);
+  for (row = 0; row < 3; row++) {
+    line(0, row * tileSize, tileSize * 3, row * tileSize);
+  }
+  for (col = 0; col < 3; col++) {
+    line(col * tileSize, 0, col * tileSize, tileSize * 3);
+  }
 
+}
+function drawTiles() { 
+  //tiles
+  for (row = 0; row < 3; row++) {
+    for (col = 0; col < 3; col++) {
+      tileRows[row][col].show();
+    }
+  }
+}
 
-// //Interactive Assignment - Gomoku 
-// // Li
-// //Sept 20, 2022
-// //Extra For Experts - Centered Circle that's not an image. coded algorithm
+//who's turn is it?
+function showTurn(){
+  noStroke();
+  fill(100, 0, 0);
+  text( "Turn: " + currentPlayer, 10, 20);
+}
 
-// //global variables and images
-// let boardImage;
-// let heartImages = [];
-// let crossImages = [];
+function switchPlayer() { 
+  //change turns
+  if (currentPlayer == "X") {
+    currentPlayer = "O";
+  } else {
+    currentPlayer = "X";
+  }
+}
 
-// //Actual Board 0-->User, -1-->Empty, 1-->Bot
-// let board = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
+//when mouse is clicked
+function mouseClicked() {
+  for (row = 0; row < 3; row++) {
+    for (col = 0; col < 3; col++) {
+      ifEmpty(tileRows[row][col]);
+    }
+  }
+}
 
-// //To prevent Bot for playing untill the user has selected a valid board position.
-// let turn = true
+function ifEmpty(currentTile) { 
+  //check if tile empty
+  if (currentTile.isMouseInBounds() && currentTile.isEmpty()) {
+    currentTile.change(currentPlayer)
+    switchPlayer();
+  }
+}
 
-// //To display win or draw at the end of the game.
-// let win = false;
+//making each tile an actual object
+class Tile {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.theTurn = " ";
+  }
 
-// //To refresh the board and canvas.
-// let gameEnd = false;
+  change(theTurn) {
+    //ensures that the letter on the tile is correct
+    if (theTurn == "X") {
+      this.theTurn = "X";
+    } else if (theTurn == "O") {
+      this.theTurn = "O";
+    }
+  }
 
-// //To stop user for clicking for sometime.
-// let play = true;
+  isEmpty() {
+    if (this.theTurn == " ") {
+      //if empty
+      return true;
+    } else {
+      //if not then error
+      alert("Must place on empty tile");//found alert outside of p5js references
+      //thankful that the pop up actually works
+      return false;
+    }
+  }
 
-// function preload() {
-//   boardImage = loadImage("board.png");
-//   for (let i = 0; i < 4; i++) {
-//     heartImages[i] = loadImage("heart.png");
-//   }
-//   for (let i = 0; i < 5; i++) {
-//     xImages[i] = loadImage("x.png");
-//   }
-// }
+  //checking if mouse is inside the tile
+  isMouseInBounds() {
+    let dx = this.x * tileSize;
+    let dy = this.y * tileSize;
+    if (mouseX > dx &&
+      mouseX < dx + tileSize &&
+      mouseY > dy &&
+      mouseY < dy + tileSize) {
+      return true;
+    }
+    return false;
+  }
 
+  //show the tile
+  show() {
+    let dx = this.x * tileSize;
+    let dy = this.y * tileSize;
+    if (this.isMouseInBounds()) {
+      fill(150);
+      rect(dx, dy, tileSize, tileSize);
+    }
 
-// function setup() {
-//   createCanvas(600, 500);
-//   imageMode(CENTER);
-//   rectMode(CENTER);
-//   background(255);
-//   image(boardImage, width / 2, height / 2, 300, 300);
-// }
-
-
-// function mousePressed() {
-//   if (!play)
-//     return;
-//   if (gameEnd) {
-//     background(255);
-//     image(boardImage, width / 2, height / 2, 300, 300);
-//     gameEnd = false;
-//     return;
-//   } else {
-//     clickX = mouseX;
-//     clickY = mouseY;
-//     let ind = clickIndex(clickX, clickY);
-//     if (turn) {
-//       //To check if user clicked on an empty location
-//       if (board[ind] === -1) {
-//         board[ind] = 0;
-//         placeImage(ind, random(heartImages));
-//         // if (checkWin(board)[0])
-//         //   console.log("You never Win!");
-//         if (checkDraw(board)) {
-//           win = false;
-//           play = false; //Now user's clicks will have no effect for 250ms
-//           setTimeout(afterGame, 250);
-//         }
-//         turn = !turn;
-//       }
-//     }
-//   }
-// }
-
-// function mouseReleased() {
-//   if (!turn) {
-//     let tempBoard = minimax(board, 1)[1];
-//     for (let i = 0; i < tempBoard.length; i++) {
-//       if ((tempBoard[i] === 1) && (board[i] !== 1)) {
-//         placeImage(i, random(xImages));
-//       }
-//     }
-//     board = tempBoard;
-//     let check = checkWin(board);
-//     if (check[0]) {
-//       drawLine(check[1]);
-//       win = true;
-//       play = false;
-//       setTimeout(afterGame, 500);
-//     }
-//     turn = !turn;
-//   }
-// }
-
-// function afterGame() {
-//   for (let i = 0; i < board.length; i++) {
-//     board[i] = -1;
-//   }
-//   gameEnd = true;
-//   background(255);
-//   strokeWeight(2);
-//   stroke(0);
-//   fill(0);
-//   textSize(100);
-//   textAlign(CENTER);
-//   if (win)
-//     text("BOT WINS!", 300, 250);
-//   else
-//     text("DRAW", 300, 250);
-//   textSize(20);
-//   noStroke();
-//   text("Click to restart", 300, 350);
-//   setTimeout(function() {
-//     play = true;
-//   }, 1000);
-// }
-
-// function drawLine(pos) {
-//   strokeWeight(6);
-//   stroke(0);
-//   if (pos === "r0")
-//     line(164, 157, 394, 157);
-//   if (pos === "r3")
-//     line(162, 252, 422, 252);
-//   if (pos === "r6")
-//     line(180, 340, 405, 340);
-//   if (pos === "c0")
-//     line(200, 112, 200, 380);
-//   if (pos === "c1")
-//     line(283, 108, 283, 388);
-//   if (pos === "c2")
-//     line(380, 112, 380, 380);
-//   if (pos === "md")
-//     line(167, 138, 423, 367);
-//   if (pos === "sd")
-//     line(173, 360, 410, 130);
-// }
-
-
-// //To check what index of the board has the user clicked!
-// function clickIndex(x, y) {
-//   if (x < 234 && y < 200)
-//     return 0
-//   if (x > 234 && x < 337 && y < 200)
-//     return 1;
-//   if (x > 337 && y < 200)
-//     return 2;
-//   if (x < 234 && y > 200 && y < 288)
-//     return 3;
-//   if (x > 234 && x < 337 && y > 200 && y < 288)
-//     return 4;
-//   if (x > 337 && y > 200 && y < 288)
-//     return 5;
-//   if (x < 234 && y > 288)
-//     return 6;
-//   if (x > 234 && x < 337 && y > 288)
-//     return 7;
-//   if (x > 337 && y > 288)
-//     return 8;
-// }
-
-// function placeImage(i, img) {
-//   if (i === 0)
-//     image(img, 210, 150);
-//   if (i === 1)
-//     image(img, 290, 150);
-//   if (i === 2)
-//     image(img, 380, 150);
-//   if (i === 3)
-//     image(img, 210, 235);
-//   if (i === 4)
-//     image(img, 290, 233);
-//   if (i === 5)
-//     image(img, 380, 230);
-//   if (i === 6)
-//     image(img, 210, 315);
-//   if (i === 7)
-//     image(img, 290, 310);
-//   if (i === 8)
-//     image(img, 375, 305);
-// }
+    //display text
+    fill(0);
+    push();
+    translate(tileSize/2, tileSize/2); //still struggling with centering the entire thing, so i just did the text alone
+    text(this.theTurn, dx, dy);
+    pop();
+  }
+}
