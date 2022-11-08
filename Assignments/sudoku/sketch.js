@@ -7,7 +7,15 @@
 
 //global variables
 let tileSize = 133; 
-let tileRows = []; 
+let tileRows = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0]]; 
 
 //setup
 function setup() {
@@ -18,9 +26,9 @@ function setup() {
 function setupTiles() {
   for (let row = 0; row < 9; row++) {
     tileRows[row] = [];
-    for (let col = 0; col < 9; col++) {
-      tileRows[row][col] = new Tile(col, row);
-    }
+    // for (let col = 0; col < 9; col++) {
+    //   tileRows[row][col] = new Tile(col, row);
+    // }
   }
 }
 
@@ -46,10 +54,10 @@ function drawGrid() {
   noFill();
   stroke(0);
   for (let row = 0; row < 9; row++) {
-    line(0, row * tileSize, tileSize * 3, row * tileSize);
+    line(0, row * tileSize, tileSize * 9, row * tileSize);
   }
   for (let col = 0; col < 9; col++) {
-    line(col * tileSize, 0, col * tileSize, tileSize * 3);
+    line(col * tileSize, 0, col * tileSize, tileSize * 9);
   }
 
 }
@@ -79,26 +87,26 @@ function drawTiles() {
 //   }
 // }
 
-//making each tile an actual object
-class Tile {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.theTurn = " ";
-  }
+// //making each tile an actual object
+// class Tile {
+//   constructor(x, y) {
+//     this.x = x;
+//     this.y = y;
+//     this.theTurn = " ";
+//   }
 
-  isEmpty() {
-    if (this.theTurn === " ") {
-      //if empty
-      return true;
-    } 
-    else {
-      //if not then error
-      alert("Must place on empty tile");//found alert outside of p5js references
-      //thankful that the pop up actually works
-      return false;
-    }
-  }
+//   isEmpty() {
+//     if (this.theTurn === " ") {
+//       //if empty
+//       return true;
+//     } 
+//     else {
+//       //if not then error
+//       alert("Must place on empty tile");//found alert outside of p5js references
+//       //thankful that the pop up actually works
+//       return false;
+//     }
+//   }
 
   //checking if mouse is inside the tile
   isMouseInBounds() {
