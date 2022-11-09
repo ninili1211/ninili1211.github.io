@@ -35,11 +35,10 @@ function mousePressed() {
 
   let x = Math.floor(mouseX/cellWidth);
   let y = Math.floor(mouseY/cellHeight);
-
   if (grid[y][x] === 0) {
-    grid[y][x] = 1;
+    grid[y][x] = 0;
   }
-  else if (grid[y][x] === 1) {
+  if (grid[y][x] === 1) {
     grid[y][x] = 0;
   }
   
@@ -53,8 +52,41 @@ function displayGrid(grid) {
       if (grid[y][x] === 0) {
         fill("#c6d2ed");
       }
-      else if (grid[y][x] === 1) {
+      if (grid[y][x] === 1) {
         fill("#edf6f9");
+        text("1");
+      }
+      if (grid[y][x] === 2) {
+        fill("#edf6f9");
+        text("2");
+      }
+      if (grid[y][x] === 3) {
+        fill("#edf6f9");
+        text("3");
+      }
+      if (grid[y][x] === 4) {
+        fill("#edf6f9");
+        text("4");
+      }
+      if (grid[y][x] === 5) {
+        fill("#edf6f9");
+        text("5");
+      }
+      if (grid[y][x] === 6) {
+        fill("#edf6f9");
+        text("6");
+      }
+      if (grid[y][x] === 7) {
+        fill("#edf6f9");
+        text("7");
+      }
+      if (grid[y][x] === 8) {
+        fill("#edf6f9");
+        text("8");
+      }
+      if (grid[y][x] === 9) {
+        fill("#edf6f9");
+        text("1");
       }
       rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
     }
