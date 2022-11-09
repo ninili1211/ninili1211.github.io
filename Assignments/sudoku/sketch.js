@@ -7,134 +7,56 @@
 
 //global variables
 let tileSize = 133; 
-let tileRows = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0]]; 
 
-//setup
+let grid = [[0, 0, 7, 4, 9, 1, 6, 0, 5],
+  [2, 0, 0, 0, 6, 0, 3, 0, 9],
+  [0, 0, 0, 0, 0, 7, 0, 1, 0],
+  [0, 5, 8, 6, 0, 0, 0, 0, 4],
+  [0, 0, 3, 0, 0, 0, 0, 9, 0],
+  [0, 0, 6, 2, 0, 0, 1, 8, 7],
+  [9, 0, 4, 0, 7, 0, 0, 0, 2],
+  [6, 7, 0, 8, 3, 0, 0, 0, 0],
+  [8, 1, 0, 0, 4, 5, 0, 0, 0]];
+
 function setup() {
-  createCanvas(400, 400);
-  setupTiles();
+  createCanvas(windowWidth, windowHeight);
 }
 
-function setupTiles() {
-  for (let row = 0; row < 9; row++) {
-    tileRows[row] = [];
-    // for (let col = 0; col < 9; col++) {
-    //   tileRows[row][col] = new Tile(col, row);
-    // }
-  }
-}
 
-//reset
-function keyPressed() {
-  resetGame();
-}
-
-function resetGame() {
-  createCanvas(400, 400);
-  setupTiles();
-}
-
-//draw
 function draw() {
-  background(255, 232, 214);
-  drawGrid();
-  drawTiles();
+  background(220);
+  displayGrid(grid);
 }
 
-//game board
-function drawGrid() {
-  noFill();
-  stroke(0);
-  for (let row = 0; row < 9; row++) {
-    line(0, row * tileSize, tileSize * 9, row * tileSize);
-  }
-  for (let col = 0; col < 9; col++) {
-    line(col * tileSize, 0, col * tileSize, tileSize * 9);
-  }
+function mousePressed() {
+  console.log(mouseX, mouseY);
+  let cellWidth = width / grid[0].length;
+  let cellHeight = height / grid.length;
 
+  let x = Math.floor(mouseX/cellWidth);
+  let y = Math.floor(mouseY/cellHeight);
+
+  if (grid[y][x] === 0) {
+    grid[y][x] = 1;
+  }
+  else if (grid[y][x] === 1) {
+    grid[y][x] = 0;
+  }
+  
 }
-function drawTiles() { 
-  //tiles
-  for (let row = 0; row < 9; row++) {
-    for (let col = 0; col < 9; col++) {
-      tileRows[row][col].show();
+
+function displayGrid(grid) {
+  let cellWidth = width / grid[0].length;
+  let cellHeight = height / grid.length;
+  for (let y=0; y<grid.length; y++) {
+    for (let x=0; x<grid[y].length; x++) {
+      if (grid[y][x] === 0) {
+        fill("#c6d2ed");
+      }
+      else if (grid[y][x] === 1) {
+        fill("#edf6f9");
+      }
+      rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
     }
   }
-}
-
-//when mouse is clicked
-// function mouseClicked() {
-//   for (let row = 0; row < 9; row++) {
-//     for (let col = 0; col < 9; col++) {
-//       ifEmpty(tileRows[row][col]);
-//     }
-//   }
-// }
-
-// function ifEmpty(currentTile) { 
-//   //check if tile empty
-//   if (currentTile.isMouseInBounds() && currentTile.isEmpty()) {
-//     currentTile.change(currentPlayer);
-//     switchPlayer();
-//   }
-// }
-
-// //making each tile an actual object
-// class Tile {
-//   constructor(x, y) {
-//     this.x = x;
-//     this.y = y;
-//     this.theTurn = " ";
-//   }
-
-//   isEmpty() {
-//     if (this.theTurn === " ") {
-//       //if empty
-//       return true;
-//     } 
-//     else {
-//       //if not then error
-//       alert("Must place on empty tile");//found alert outside of p5js references
-//       //thankful that the pop up actually works
-//       return false;
-//     }
-//   }
-
-  //checking if mouse is inside the tile
-  isMouseInBounds() {
-    let dx = this.x * tileSize;
-    let dy = this.y * tileSize;
-    if (mouseX > dx &&
-      mouseX < dx + tileSize &&
-      mouseY > dy &&
-      mouseY < dy + tileSize) {
-      return true;
-    }
-    return false;
-  }
-
-  //show the tile
-  // show() {
-  //   let dx = this.x * tileSize;
-  //   let dy = this.y * tileSize;
-  //   if (this.isMouseInBounds()) {
-  //     fill(150);
-  //     rect(dx, dy, tileSize, tileSize);
-  //   }
-
-  //   //display text
-  //   fill(0);
-  //   push();
-  //   translate(tileSize/2, tileSize/2); //still struggling with centering the entire thing, so i just did the text alone
-  //   text(this.theTurn, dx, dy);
-  //   pop();
-  // }
 }
