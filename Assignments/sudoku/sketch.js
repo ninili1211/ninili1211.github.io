@@ -9,6 +9,8 @@
 let tileSize = 133; 
 let ROWS = 9;
 let COLS = 9;
+let cellWidth;
+let cellHeight;
 
 let grid = [[0, 0, 7, 4, 9, 1, 6, 0, 5],
   [2, 0, 0, 0, 6, 0, 3, 0, 9],
@@ -30,8 +32,8 @@ function draw() {
 }
 
 function displayGrid(grid) {
-  let cellWidth = width / grid[0].length;
-  let cellHeight = height / grid.length;
+  cellWidth = width / grid[0].length;
+  cellHeight = height / grid.length;
   for (let y = 0; y<grid.length; y++) {
     for (let x = 0; x<grid[y].length; x++) {
       if (grid[y][x] === 0) {
@@ -45,10 +47,13 @@ function displayGrid(grid) {
   }
 }
 
-for (let y < 0; y < grid.length; y++) {
-  fill("#cdb4db");
-  rect()
-}
-
+// function mousePos() {
+//   let xPos = Math.floor(mouseX/cellWidth);
+//   let yPos = Math.floor(mouseY/cellHeight);
+//   for (let y = 0; y < grid.length; y++) {
+//     fill("cdb4db");
+//     rect();
+//   }
+// }
 //cdb4db
 //c6d2ed
