@@ -6,50 +6,59 @@ class Walker {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.colour = "red";
+    this.color = "red";
     this.speed = 5;
-    this.radius = 2;
+    this.radius = 1;
   }
+
   display() {
-    stroke(this.colour);
-    fill(this.colour);
-    circle(this.x, this.y, this.radius * 2);
+    stroke(this.color);
+    fill(this.color);
+    circle(this.x, this.y, this.radius*2);
   }
-  
+
   move() {
     let choice = random(100);
+
     if (choice < 25) {
-      this.y -+ this.speed;
-      else if (this.choice < 50) {
-        this.y += this.speed;
-      }
-      else if (this.choice < 50) {
-        this.y += this.speed;
-      }
-      else if (this.choice < 75) {
-        this.y += this.speed;
-      }
-      else if (choice < 50) {
-        this.y += this.speed;
-      }
+      //up
+      this.y -= this.speed;
     }
-}
+    else if (choice < 50) {
+      //down
+      this.y += this.speed;
+    }
+    else if (choice < 75) {
+      //right
+      this.x += this.speed;
+    }
+    else {
+      //left
+      this.x -= this.speed;
+    }
+
+  }
 }
 
 let michael;
+let katherine;
+let celia;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   michael = new Walker(width/2, height/2);
-  katherine.colour = "blue" 
   katherine = new Walker(200, 300);
-  thing = new Walker(500.,)
-  
+  katherine.color = "blue";
+  celia = new Walker(width-150, height-150);
+  celia.color = "green";
 }
 
 function draw() {
   michael.move();
   katherine.move();
+  celia.move();
+
   michael.display();
   katherine.display();
+  celia.display();
 }
