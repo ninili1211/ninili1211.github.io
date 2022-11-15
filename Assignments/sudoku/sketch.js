@@ -5,55 +5,28 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-//global variables
-let tileSize = 133; 
-let ROWS = 9;
-let COLS = 9;
-let cellWidth;
-let cellHeight;
+let grid = [[-1, 5, -1, 9, -1, -1, -1, -1, -1],
+[8, -1, -1, -1, 4, -1, 3, -1, 7],
+[-1, -1, -1, 2, 8, -1, 1, 9, -1],
+[5, 3, 8, 6, -1, 7, 9, 4, -1],
+[-1, 2, -1, 3, -1, 1, -1, -1, -1],
+[1, -1, 9, 8, -1, 4, 6, 2, 3],
+[9, -1, 7, 4, -1, -1, -1, -1, -1],
+[-1, 4, 5, -1, -1, -1, 2, -1, 9],
+[-1, -1, -1, -1, 3, -1, -1, 7, -1]
+];
 
-let grid = [[0, 0, 7, 4, 9, 1, 6, 0, 5],
-  [2, 0, 0, 0, 6, 0, 3, 0, 9],
-  [0, 0, 0, 0, 0, 7, 0, 1, 0],
-  [0, 5, 8, 6, 0, 0, 0, 0, 4],
-  [0, 0, 3, 0, 0, 0, 0, 9, 0],
-  [0, 0, 6, 2, 0, 0, 1, 8, 7],
-  [9, 0, 4, 0, 7, 0, 0, 0, 2],
-  [6, 7, 0, 8, 3, 0, 0, 0, 0],
-  [8, 1, 0, 0, 4, 5, 0, 0, 0]];
-
-function setup() {
-  createCanvas(windowWidth, windowHeight);
+function style() {
+  return (
+    <div className = "style">
+      <div className = "style-header">
+        <h3>Sudoku Solver</h3>
+        <input className = "cellInput" />
+      </div>
+    </div>
+  );
 }
 
-function draw() {
-  background(220);
-  displayGrid(grid);
-}
+export default style;
 
-function displayGrid(grid) {
-  cellWidth = width / grid[0].length;
-  cellHeight = height / grid.length;
-  for (let y = 0; y<grid.length; y++) {
-    for (let x = 0; x<grid[y].length; x++) {
-      if (grid[y][x] === 0) {
-        fill("#edf6f9");
-      }
-      else {
-        fill("#c8e7ff");
-      }
-      rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-    }
-  }
-}
 
-// function mousePos() {
-//   let xPos = Math.floor(mouseX/cellWidth);
-//   let yPos = Math.floor(mouseY/cellHeight);
-//   for (let y = 0; y < grid.length; y++) {
-//     fill("cdb4db");
-//     rect();
-//   }
-// }
-//cdb4db
-//c6d2ed
