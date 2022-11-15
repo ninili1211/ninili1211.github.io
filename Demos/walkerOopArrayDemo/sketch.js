@@ -1,4 +1,4 @@
-// Walker Oop Demo
+// Walker Oop Arrays Demo
 // Nini
 // 11/14/22
 
@@ -40,25 +40,29 @@ class Walker {
   }
 }
 
-let michael;
-let katherine;
-let celia;
+let walkerArray = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  michael = new Walker(width/2, height/2);
-  katherine = new Walker(200, 300);
-  katherine.color = "blue";
-  celia = new Walker(width-150, height-150);
-  celia.color = "green";
+
+  let michael = new Walker(width/2, height/2);
+  walkerArray.push(michael);
 }
 
 function draw() {
-  michael.move();
-  katherine.move();
-  celia.move();
+  for (let i = 0; i < walkerArray.length; i++) {
+    walkerArray[i].move();
+    walkerArray[i].display();
+  }
+}
 
-  michael.display();
-  katherine.display();
-  celia.display();
+function spawnWalker() {
+  let michael = new Walker(random(width), random(height));
+  let someColor = color(random(255), random(255), random(255));
+  michael.color = someColor;
+  walkerArray.push(michael);
+}
+
+function keyPressed() {
+  spawnWalker();
 }
