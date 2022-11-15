@@ -3,11 +3,12 @@
 // 10/28/2022
 //
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// - Got the AI to work
 
 let tileSize = 133; 
 let tileRows = []; 
 let currentPlayer = "X"; 
+let detection;
 
 //setup
 function setup() {
@@ -157,4 +158,8 @@ class Tile {
     text(this.theTurn, dx, dy);
     pop();
   }
+}
+
+function AI(theTurn) {
+  if ()
 }
