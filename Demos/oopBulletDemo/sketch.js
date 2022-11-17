@@ -3,11 +3,12 @@
 // 11/16/22
 
 class Bullet {
-  constructor() {
+  constructor(theImage) {
     this.x = 200;
-    this.y = 500;
+    this.y = 250;
     this.radius = 3;
     this.dx = 5;
+    this.image = theImage;
   }
   
   move() {
@@ -19,12 +20,16 @@ class Bullet {
   }
 
   display() {
-    fill("black");
-    circle(this.x, this.y, this.radius*2);
+    image(this.image, this.x, this.y, this.image.width & 0.3. this.image.height * 0.3);
   }
 }
 
 let bullets = [];
+let bulletImg;
+
+function preload() {
+  bulletImg = loadImage("bulletBill.png");
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -45,7 +50,7 @@ function draw() {
   }
 }
 
-function mousePressed() {
-  let theBullet = new Bullet();
+function keyPressed() {
+  let theBullet = new Bullet(bulletImg);
   bullets.push(theBullet);
 }
