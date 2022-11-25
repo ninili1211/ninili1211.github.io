@@ -34,31 +34,42 @@ function keyPressed() {
 
 class Ship {
   constructor(x, y, theImage) {
-    this.x = x;
-    this.y = y;
+    this.x = width/2;
+    this.y = height/2;
     this.dx = 5;
     this.dy = 5;
-    this.theImage(shipImage);
+    this.theImage = shipImage;
     this.state = true;
   }
 
   display() {
-    this.theImage(this.x, this.y);
+    image(this.theImage, this.x, this.y);
   }
 
   update() {
-    function keyIsDown() {
-
-    }
-   }
-  // move ship -- you might want to use the keyIsDown() function here
-
-    handleKeyPress() {
-    // you only need to use this if you are doing the extra for experts...
-      // if you are, you should make a bullet if the space key was pressed
+    if (isKeyPressed === true) {
+      if (keyCode === RIGHT_ARROW) {
+        this.x += this.dx;
+      }
+      if (keyCode === LEFT_ARROW) {
+        this.x -= this.dx;
+      }
+      if (keyCode === UP_ARROW) {
+        this.y -= this.dy;
+      }
+      if (keyCode === DOWN_ARROW) {
+        this.y += this.dy;
+      }
     }
   }
-    // if doing extra for experts, show bullet(s)
+  // move ship -- you might want to use the keyIsDown() function here
+
+  handleKeyPress() {
+    // you only need to use this if you are doing the extra for experts...
+    // if you are, you should make a bullet if the space key was pressed
+  }
+}
+// if doing extra for experts, show bullet(s)
 
 
 // ------------------------------------------------------------------------- //
