@@ -65,7 +65,7 @@ class Ship {
   }
 
   handleKeyPress() {
-    if (keyCode === SHIFT) {
+    if (keyCode === " ") {
       this.theBullet = new Bullet(this.theBullet.x, this.theBullet.y, this.theBullet.dx, this.theBullet.dy);
     }
   }
@@ -83,19 +83,23 @@ class Ship {
 
 class Bullet {
   constructor(x, y, dx, dy, theImage) {
-    // define the variables needed for the bullet here
+    this.x = x;
+    this.y = y;
+    this.dx = 5;
+    this.dy = 5;
+    this.theImage = bulletImage;
   }
 
   update() {
-    // what does the bullet need to do during each frame? how do we know if it is off screen?
+    this.y += this.dy;
   }
 
   display() {
-    // show the bullet
+    image(this.image, this.x, this.y, this.dx, this.dy);
   }
 
   isOnScreen() {
-    // check if the bullet is still on the screen
+    
   }
 }
 
