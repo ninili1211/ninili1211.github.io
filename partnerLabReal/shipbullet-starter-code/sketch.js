@@ -39,7 +39,7 @@ class Ship {
     this.dx = 5;
     this.dy = 5;
     this.theImage = shipImage;
-    this.state = true;
+    this.bullet;
   }
 
   display() {
@@ -47,7 +47,7 @@ class Ship {
   }
 
   update() {
-    if (isKeyPressed === true) {
+    if (keyIsPressed === true) {
       if (keyCode === RIGHT_ARROW) {
         this.x += this.dx;
       }
@@ -61,12 +61,13 @@ class Ship {
         this.y += this.dy;
       }
     }
+
   }
-  // move ship -- you might want to use the keyIsDown() function here
 
   handleKeyPress() {
-    // you only need to use this if you are doing the extra for experts...
-    // if you are, you should make a bullet if the space key was pressed
+    if (keyCode === SHIFT) {
+      this.theBullet = new Bullet(this.theBullet.x, this.theBullet.y, this.theBullet.dx, this.theBullet.dy);
+    }
   }
 }
 // if doing extra for experts, show bullet(s)
